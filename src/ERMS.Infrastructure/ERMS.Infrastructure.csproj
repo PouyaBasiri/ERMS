@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ERMS.Application\ERMS.Application.csproj" />
+    <ProjectReference Include="..\ERMS.Domain\ERMS.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
