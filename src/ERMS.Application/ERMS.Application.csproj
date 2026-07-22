@@ -6,4 +6,10 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ERMS.Contracts\ERMS.Contracts.csproj" />
+    <ProjectReference Include="..\ERMS.Domain\ERMS.Domain.csproj" />
+    <ProjectReference Include="..\ERMS.SharedKernel\ERMS.SharedKernel.csproj" />
+  </ItemGroup>
+
 </Project>
