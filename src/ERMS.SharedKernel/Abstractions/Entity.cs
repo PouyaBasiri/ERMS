@@ -14,13 +14,13 @@ public abstract class Entity
 
     public Guid Id { get; protected set; }
 
+    public IReadOnlyCollection<IDomainEvent> DomainEvents =>_domainEvents.AsReadOnly();
+    protected void RaiseDomainEvent(IDomainEvent domainEvent)
+    {
+        _domainEvents.Add(domainEvent);
+    }
 
-    public IReadOnlyCollection<IDomainEvent> DomainEvents =>
-        _domainEvents.AsReadOnly();
-
-
-    protected void AddDomainEvent(
-        IDomainEvent domainEvent)
+    protected void AddDomainEvent(IDomainEvent domainEvent)
     {
         _domainEvents.Add(domainEvent);
     }
