@@ -1,9 +1,8 @@
-﻿using ERMS.Domain.ValueObjects;
+﻿using ERMS.Domain.Events;
+using ERMS.Domain.ValueObjects;
 using ERMS.SharedKernel.Abstractions;
 using ERMS.SharedKernel.Results;
-using System;
-using System.Collections.Generic;
-using System.Text;
+
 
 namespace ERMS.Domain.Users
 {

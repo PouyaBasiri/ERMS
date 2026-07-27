@@ -5,13 +5,12 @@ using System.Text;
 
 namespace ERMS.Domain.Users
 {
-    public sealed class UserCreatedEvent : DomainEvent
+    public sealed class UserConstants
     {
-        public UserCreatedEvent(Guid userId)
-        {
-            UserId = userId;
-        }
+        public const int FirstNameMaxLength = 100;
 
-        public Guid UserId { get; }
+        public const int LastNameMaxLength = 100;
+
+        public const int EmailMaxLength = 256;
     }
 }

@@ -4,7 +4,12 @@ using System.Text;
 
 namespace ERMS.Domain.Events
 {
-    internal class UserCreatedEvent
+    public sealed class UserCreatedEvent:DomainEvent
     {
+        public UserCreatedEvent(Guid userId)
+        {
+            UserId = userId;
+        }
+        public Guid UserId { get; }
     }
 }
