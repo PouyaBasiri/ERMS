@@ -6,7 +6,7 @@ namespace ERMS.SharedKernel.Errors
 {
     public enum ErrorType
     {
-        Failure = 0,
+        None = 0,
 
         Validation = 1,
 
@@ -18,6 +18,8 @@ namespace ERMS.SharedKernel.Errors
 
         Forbidden = 5,
 
-        Unexpected = 6
+        Unexpected = 6,
+
+        Failure = 7
     }
 }

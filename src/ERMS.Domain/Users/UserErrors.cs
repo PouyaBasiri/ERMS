@@ -7,28 +7,39 @@ namespace ERMS.Domain.Users
 {
     public static class UserErrors
     {
-        public static readonly Error EmailIsRequired =
-            new(
+        public static readonly Error FirstNameRequired =
+         Error.Validation(
+             "User.FirstNameRequired",
+             "First name is required.");
+
+        public static readonly Error LastNameRequired =
+            Error.Validation(
+                "User.LastNameRequired",
+                "Last name is required.");
+
+        public static readonly Error EmailRequired =
+            Error.Validation(
                 "User.EmailRequired",
-                "Email is required.",
-                ErrorType.Validation);
+                "Email is required.");
 
         public static readonly Error InvalidEmail =
-            new(
+            Error.Validation(
                 "User.InvalidEmail",
-                "Email format is invalid.",
-                ErrorType.Validation);
+                "Email format is invalid.");
 
-        public static readonly Error AlreadyActive =
-            new(
-                "User.AlreadyActive",
-                "User is already active.",
-                ErrorType.Conflict);
+        public static readonly Error EmailTooLong =
+            Error.Validation(
+                "User.EmailTooLong",
+                $"Email cannot exceed {UserConstants.EmailMaxLength} characters.");
 
-        public static readonly Error AlreadyInactive =
-            new(
-                "User.AlreadyInactive",
-                "User is already inactive.",
-                ErrorType.Conflict);
+        public static readonly Error FirstNameTooLong =
+            Error.Validation(
+                "User.FirstNameTooLong",
+                $"First name cannot exceed {UserConstants.FirstNameMaxLength} characters.");
+
+        public static readonly Error LastNameTooLong =
+            Error.Validation(
+                "User.LastNameTooLong",
+                $"Last name cannot exceed {UserConstants.LastNameMaxLength} characters.");
     }
 }
