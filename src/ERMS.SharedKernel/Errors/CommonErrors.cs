@@ -6,10 +6,34 @@ namespace ERMS.SharedKernel.Errors
 {
     public class CommonErrors
     {
-        public static readonly Error Unexpected = new("Common.Unexpected", "An unexpected error occurred.",
-            ErrorType.Unexpected);
+        public static readonly Error Unexpected =
+        Error.Failure(
+            "Common.Unexpected",
+            "An unexpected error occurred.");
 
-        public static readonly Error Validation = new("Common.Validation", "One or more validation errors occurred.",
-                ErrorType.Validation);
+        public static readonly Error Validation =
+            Error.Validation(
+                "Common.Validation",
+                "One or more validation errors occurred.");
+
+        public static readonly Error NotFound =
+            Error.NotFound(
+                "Common.NotFound",
+                "The requested resource was not found.");
+
+        public static readonly Error Unauthorized =
+            Error.Unauthorized(
+                "Common.Unauthorized",
+                "Authentication is required.");
+
+        public static readonly Error Forbidden =
+            Error.Forbidden(
+                "Common.Forbidden",
+                "You do not have permission to perform this action.");
+
+        public static readonly Error Conflict =
+            Error.Conflict(
+                "Common.Conflict",
+                "The requested operation conflicts with the current resource state.");
     }
 }
