@@ -1,4 +1,6 @@
-﻿using ERMS.SharedKernel.Abstractions;
+﻿using ERMS.Domain.Users;
+using ERMS.SharedKernel.Abstractions;
+using ERMS.SharedKernel.Results;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -16,21 +18,45 @@ namespace ERMS.Domain.ValueObjects
         }
 
         public string FirstName { get; }
+
         public string LastName { get; }
-        public string DisplayName =>$"{FirstName} {LastName}";
 
-        public static bool TryCreate(string? firstName,string? lastName,out FullName? fullName)
+        public string DisplayName =>
+            $"{FirstName} {LastName}";
+
+        public static Result<FullName> Create(
+            string? firstName,
+            string? lastName)
         {
-            fullName = null;
-
             if (string.IsNullOrWhiteSpace(firstName))
-                return false;
+            {
+                return Result<FullName>.Failure(
+                    UserErrors.FirstNameRequired);
+            }
 
             if (string.IsNullOrWhiteSpace(lastName))
-                return false;
+            {
+                return Result<FullName>.Failure(
+                    UserErrors.LastNameRequired);
+            }
 
-            fullName = new FullName(firstName.Trim(),lastName.Trim());
-            return true;
+            firstName = firstName.Trim();
+            lastName = lastName.Trim();
+
+            if (firstName.Length > UserConstants.FirstNameMaxLength)
+            {
+                return Result<FullName>.Failure(
+                    UserErrors.FirstNameTooLong);
+            }
+
+            if (lastName.Length > UserConstants.LastNameMaxLength)
+            {
+                return Result<FullName>.Failure(
+                    UserErrors.LastNameTooLong);
+            }
+
+            return Result<FullName>.Success(
+                new FullName(firstName, lastName));
         }
 
         protected override IEnumerable<object?> GetEqualityComponents()
@@ -39,6 +65,9 @@ namespace ERMS.Domain.ValueObjects
             yield return LastName.ToUpperInvariant();
         }
 
-        public override string ToString()=> DisplayName;
+        public override string ToString()
+        {
+            return DisplayName;
+        }
     }
 }
