@@ -10,6 +10,10 @@
     <ProjectReference Include="..\ERMS.Contracts\ERMS.Contracts.csproj" />
     <ProjectReference Include="..\ERMS.Domain\ERMS.Domain.csproj" />
     <ProjectReference Include="..\ERMS.SharedKernel\ERMS.SharedKernel.csproj" />
+	<PackageReference Include="MediatR" /> 
+	<PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" /> 
+	<PackageReference Include="FluentValidation" /> 
+	<PackageReference Include="FluentValidation.DependencyInjectionExtensions" />
   </ItemGroup>
 
 </Project>

@@ -1,11 +1,11 @@
 ﻿using ERMS.Domain.Users;
-using ERMS.SharedKernel.Abstractions;
+using ERMS.SharedKernel;
 using ERMS.SharedKernel.Results;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ERMS.Domain.ValueObjects
+namespace ERMS.Domain.Users.ValueObjects
 {
     public sealed class FullName : ValueObject
     {
