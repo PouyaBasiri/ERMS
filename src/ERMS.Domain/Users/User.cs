@@ -1,6 +1,7 @@
 ﻿using ERMS.Domain.Events;
-using ERMS.Domain.ValueObjects;
-using ERMS.SharedKernel.Abstractions;
+using ERMS.Domain.Users.Events;
+using ERMS.Domain.Users.ValueObjects;
+using ERMS.SharedKernel;
 using ERMS.SharedKernel.Results;
 
 

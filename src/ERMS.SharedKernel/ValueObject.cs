@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ERMS.SharedKernel.Abstractions
+namespace ERMS.SharedKernel
 {
     public abstract class ValueObject
     {

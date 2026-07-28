@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace ERMS.Domain.Events
+namespace ERMS.Application
 {
-    internal class UserErrors
+    internal class DependencyInjection
     {
     }
 }

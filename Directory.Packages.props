@@ -14,7 +14,14 @@
     <PackageVersion Include="xunit.runner.visualstudio" Version="3.0.1" />
 
     <PackageVersion Include="coverlet.collector" Version="6.0.2" />
-
+	
+    <PackageVersion Include="MediatR" Version="13.1.0" /> 
+	
+	<PackageVersion Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.1.0" /> 
+	
+	<PackageVersion Include="FluentValidation" Version="12.1.0" /> 
+	
+	<PackageVersion Include="FluentValidation.DependencyInjectionExtensions" Version="12.1.0" /> 
   </ItemGroup>
 
 
