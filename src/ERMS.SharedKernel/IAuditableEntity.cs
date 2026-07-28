@@ -1,4 +1,4 @@
-﻿namespace ERMS.SharedKernel.Abstractions;
+﻿namespace ERMS.SharedKernel;
 
 
 public interface IAuditableEntity
