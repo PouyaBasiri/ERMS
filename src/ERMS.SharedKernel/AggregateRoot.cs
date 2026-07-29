@@ -1,13 +1,32 @@
-﻿using System;
+﻿using ERMS.Domain.Events;
+using ERMS.SharedKernel.Events;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace ERMS.SharedKernel
 {
-    public abstract class AggregateRoot: Entity
+    public abstract class AggregateRoot : Entity
     {
-        protected AggregateRoot(Guid id) : base(id)
+        private readonly List<IDomainEvent> _domainEvents = [];
+
+        protected AggregateRoot(Guid id)
+            : base(id)
         {
+        }
+
+        public IReadOnlyCollection<IDomainEvent> DomainEvents =>
+            _domainEvents.AsReadOnly();
+
+        protected void RaiseDomainEvent(
+            IDomainEvent domainEvent)
+        {
+            _domainEvents.Add(domainEvent);
+        }
+
+        public void ClearDomainEvents()
+        {
+            _domainEvents.Clear();
         }
     }
 }

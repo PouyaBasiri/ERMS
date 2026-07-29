@@ -2,15 +2,35 @@ using ERMS.SharedKernel.Errors;
 
 namespace ERMS.SharedKernel.Results;
 
-public sealed class Result<T> : Result
+public sealed class Result<TValue> : Result
 {
-    private Result(T? value,bool isSuccess,Error error): base(isSuccess,error)
+    private readonly TValue? _value;
+
+    private Result(
+        TValue value)
+        : base(true, Error.None)
     {
-        Value = value;
+        _value = value;
     }
-    public T? Value { get; }
-    public static Result<T> Success(T value)=> new(value,true,Error.None);
 
+    private Result(
+        Error error)
+        : base(false, error)
+    {
+        _value = default;
+    }
 
-    public static Result<T> Failure(Error error)=> new(default,false,error);
+    public TValue Value =>
+        IsSuccess
+            ? _value!
+            : throw new InvalidOperationException(
+                "The value of a failed result cannot be accessed.");
+
+    public static Result<TValue> Success(
+        TValue value)
+        => new(value);
+
+    public static new Result<TValue> Failure(
+        Error error)
+        => new(error);
 }
