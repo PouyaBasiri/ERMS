@@ -1,53 +1,59 @@
 namespace ERMS.SharedKernel.Errors;
 
-public sealed record Error
+public sealed record Error(
+    string Code,
+    string Description,
+    ErrorType Type)
 {
-    private Error(
-        string code,
-        string message,
-        ErrorType type)
-    {
-        Code = code;
-        Message = message;
-        Type = type;
-    }
-
-    public string Code { get; }
-
-    public string Message { get; }
-
-    public ErrorType Type { get; }
-
     public static readonly Error None =
-     new(string.Empty, string.Empty, ErrorType.None);
-
-    public static Error Validation(
-        string code,
-        string message)
-        => new(code, message, ErrorType.Validation);
-
-    public static Error NotFound(
-        string code,
-        string message)
-        => new(code, message, ErrorType.NotFound);
-
-    public static Error Conflict(
-        string code,
-        string message)
-        => new(code, message, ErrorType.Conflict);
+        new(string.Empty, string.Empty, ErrorType.Failure);
 
     public static Error Failure(
         string code,
-        string message)
-        => new(code, message, ErrorType.Failure);
+        string description)
+    {
+        return new(code, description, ErrorType.Failure);
+    }
+
+    public static Error Validation(
+        string code,
+        string description)
+    {
+        return new(code, description, ErrorType.Validation);
+    }
+
+    public static Error NotFound(
+        string code,
+        string description)
+    {
+        return new(code, description, ErrorType.NotFound);
+    }
+
+    public static Error Conflict(
+        string code,
+        string description)
+    {
+        return new(code, description, ErrorType.Conflict);
+    }
 
     public static Error Unauthorized(
         string code,
-        string message)
-        => new(code, message, ErrorType.Unauthorized);
+        string description)
+    {
+        return new(code, description, ErrorType.Unauthorized);
+    }
 
     public static Error Forbidden(
         string code,
-        string message)
-        => new(code, message, ErrorType.Forbidden);
+        string description)
+    {
+        return new(code, description, ErrorType.Forbidden);
+    }
+
+    public static Error Unexpected(
+        string code,
+        string description)
+    {
+        return new(code, description, ErrorType.Unexpected);
+    }
 }

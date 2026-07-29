@@ -18,6 +18,6 @@ namespace ERMS.Domain.Events
         public Guid Id { get; }
 
 
-        public DateTime OccurredOnUtc { get; }
+        public DateTime OccurredOnUtc { get; } = DateTime.UtcNow;
     }
 }
