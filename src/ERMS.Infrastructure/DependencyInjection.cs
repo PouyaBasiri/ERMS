@@ -1,5 +1,7 @@
 ﻿using ERMS.Application.Abstractions.Persistence;
+using ERMS.Domain.Users;
 using ERMS.Infrastructure.Persistence;
+using ERMS.Infrastructure.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -22,6 +24,8 @@ namespace ERMS.Infrastructure
             });
 
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            services.AddScoped<IUserRepository, UserRepository>(); 
+            services.AddScoped<IUserReadRepository, UserRepository>();
 
             return services;
         }
