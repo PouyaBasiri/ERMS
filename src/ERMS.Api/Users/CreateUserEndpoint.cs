@@ -4,15 +4,15 @@ using MediatR;
 
 namespace ERMS.Api.Users
 {
-    public sealed class CreateUserEndpoint : IEndpoint
+    public static class CreateUserEndpoint 
     { 
-        public void MapEndpoint(IEndpointRouteBuilder app)
+        public static void Map(RouteGroupBuilder group) 
         { 
-            app.MapPost("/api/users", HandleAsync).WithName("CreateUser").WithTags("Users"); 
+            group.MapPost("/", HandleAsync).WithName("CreateUser");
         } 
-        private static async Task<IResult> HandleAsync(CreateUserCommand command, ISender sender, CancellationToken cancellationToken)
+        private static async Task<IResult> HandleAsync(CreateUserCommand command, ISender sender, CancellationToken cancellationToken) 
         { 
             var result = await sender.Send(command, cancellationToken); return Results.Ok(result);
-        } 
+        }
     }
 }
