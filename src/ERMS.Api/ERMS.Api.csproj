@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\ERMS.Application\ERMS.Application.csproj" />
     <ProjectReference Include="..\ERMS.Infrastructure\ERMS.Infrastructure.csproj" />
+	<PackageReference Include="Scalar.AspNetCore" />
   </ItemGroup>
 
 </Project>
