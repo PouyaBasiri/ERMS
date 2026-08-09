@@ -12,7 +12,8 @@ namespace ERMS.Api.Users
             app.MapPost("/api/users", HandleAsync).WithName("CreateUser").WithTags("Users"); 
         }
         private static async Task<IResult> HandleAsync(CreateUserCommand command, ISender sender, CancellationToken cancellationToken)
-        { var result = await sender.Send(command, cancellationToken); return result.ToHttpResult(); 
+        {
+            var result = await sender.Send(command, cancellationToken); return result.ToHttpResult(); 
         } 
     }
 }

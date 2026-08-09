@@ -4,9 +4,10 @@ namespace ERMS.Api.Endpoints
 {
     public static class EndpointExtensions 
     {
-        public static IEndpointRouteBuilder MapApiEndpoints(this IEndpointRouteBuilder app) 
-        { 
-            app.MapUserEndpoints(); return app;
+        public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder app) 
+        {
+            new CreateUserEndpoint().MapEndpoint(app);
+            return app;
         }
     }
 }

@@ -14,6 +14,9 @@ namespace ERMS.SharedKernel
             : base(id)
         {
         }
+        protected AggregateRoot(): base(Guid.Empty)
+        {
+        }
 
         public IReadOnlyCollection<IDomainEvent> DomainEvents =>
             _domainEvents.AsReadOnly();

@@ -23,7 +23,7 @@ namespace ERMS.Infrastructure
 
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
-                options.UseOracle(
+                options.UseNpgsql(
                     configuration.GetConnectionString("DefaultConnection"));
 
                 options.AddInterceptors(

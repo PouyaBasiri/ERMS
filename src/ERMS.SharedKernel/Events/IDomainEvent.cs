@@ -1,6 +1,8 @@
 namespace ERMS.SharedKernel.Events;
 
-public interface IDomainEvent
+using MediatR;
+
+public interface IDomainEvent : INotification
 {
     Guid Id { get; }
     DateTime OccurredOnUtc { get; }

@@ -9,9 +9,7 @@ namespace ERMS.Domain.Users.ValueObjects
 {
     public sealed class FullName : ValueObject
     {
-        private FullName(
-            string firstName,
-            string lastName)
+        private FullName(string firstName, string lastName)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -24,9 +22,7 @@ namespace ERMS.Domain.Users.ValueObjects
         public string DisplayName =>
             $"{FirstName} {LastName}";
 
-        public static Result<FullName> Create(
-            string? firstName,
-            string? lastName)
+        public static Result<FullName> Create(string? firstName,string? lastName)
         {
             if (string.IsNullOrWhiteSpace(firstName))
             {
