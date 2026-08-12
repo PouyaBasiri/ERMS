@@ -15,6 +15,9 @@ namespace ERMS.Domain.Users
             Email = email;
             IsActive = true;
         }
+        private User(): base(Guid.Empty)
+        {
+        }
 
         public FullName FullName { get; private set; }
 

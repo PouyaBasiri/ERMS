@@ -7,9 +7,9 @@ using System.Text;
 
 namespace ERMS.Application.Behaviors
 {
-    public sealed class ValidationBehavior<TRequest, TResponse>
-     : IPipelineBehavior<TRequest, Result<TResponse>>
-     where TRequest : notnull
+    public sealed class ValidationBehavior<TRequest, TResponse>: IPipelineBehavior<TRequest, TResponse>
+        where TRequest : notnull 
+        where TResponse : Result
     {
         private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -19,9 +19,9 @@ namespace ERMS.Application.Behaviors
             _validators = validators;
         }
 
-        public async Task<Result<TResponse>> Handle(
+        public async Task<TResponse> Handle(
             TRequest request,
-            RequestHandlerDelegate<Result<TResponse>> next,
+            RequestHandlerDelegate<TResponse> next,
             CancellationToken cancellationToken)
         {
             if (!_validators.Any())
@@ -46,8 +46,8 @@ namespace ERMS.Application.Behaviors
                     Environment.NewLine,
                     errors.Select(x => x.ErrorMessage));
 
-                return Result<TResponse>.Failure(
-                    SharedKernel.Errors.Error.Validation(
+                return (TResponse)(object)Result<TResponse>.Failure(
+                     SharedKernel.Errors.Error.Validation(
                         "Validation.Failed",
                         message));
             }
