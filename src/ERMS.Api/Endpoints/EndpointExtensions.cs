@@ -1,4 +1,5 @@
 ﻿using ERMS.Api.Users;
+using ERMS.Application.Users;
 namespace ERMS.Api.Endpoints
 
 {
@@ -7,6 +8,7 @@ namespace ERMS.Api.Endpoints
         public static IEndpointRouteBuilder MapEndpoints(this IEndpointRouteBuilder app) 
         {
             new CreateUserEndpoint().MapEndpoint(app);
+            new GetUserEndpoint().MapEndpoint(app);
             return app;
         }
     }
