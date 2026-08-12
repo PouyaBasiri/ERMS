@@ -14,17 +14,10 @@ namespace ERMS.Application.Users
     {
         public void MapEndpoint(IEndpointRouteBuilder app)
         {
-            app.MapGet(
-                "/api/users/{id:guid}",
-                HandleAsync)
-                .WithName("GetUser")
-                .WithTags("Users");
+            app.MapGet("/api/users/{id:guid}",HandleAsync).WithName("GetUser").WithTags("Users");
         }
 
-        private static async Task<IResult> HandleAsync(
-            Guid id,
-            ISender sender,
-            CancellationToken cancellationToken)
+        private static async Task<IResult> HandleAsync(Guid id,ISender sender,CancellationToken cancellationToken)
         {
             var result = await sender.Send(
                 new GetUserQuery(id),
