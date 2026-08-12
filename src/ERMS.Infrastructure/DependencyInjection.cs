@@ -8,6 +8,7 @@ using ERMS.SharedKernel.Events;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -34,6 +35,7 @@ namespace ERMS.Infrastructure
 
             services.AddScoped<IUserRepository, UserRepository>(); 
             services.AddScoped<IUserReadRepository, UserRepository>();
+            services.AddScoped<IUserReadRepository, UserReadRepository>();
 
             return services;
         }
