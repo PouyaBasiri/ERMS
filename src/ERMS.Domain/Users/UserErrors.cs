@@ -41,5 +41,10 @@ namespace ERMS.Domain.Users
             Error.Validation(
                 "User.LastNameTooLong",
                 $"Last name cannot exceed {UserConstants.LastNameMaxLength} characters.");
+
+        public static readonly Error NotFound =
+            Error.NotFound(
+                "User.NotFound",
+                "User not found."); 
     }
 }

@@ -36,11 +36,11 @@ namespace ERMS.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<bool> ExistsByEmailAsync(string email, CancellationToken cancellationToken = default)
+        public async Task<bool> ExistsByEmailAsync(string email, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _context.Users.AnyAsync(x => x.Email == email,cancellationToken);
         }
-
+        
         public void Update(User user)
         {
             throw new NotImplementedException();
