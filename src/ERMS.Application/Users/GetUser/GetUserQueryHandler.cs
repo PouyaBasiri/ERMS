@@ -25,10 +25,7 @@ namespace ERMS.Application.Users.GetUser
             }
 
             return Result<GetUserResponse>.Success(
-                new GetUserResponse(
-                    user.Id,
-                    user.FullName.ToString(),
-                    user.Email.Value));
+                new GetUserResponse(user.Id,user.FullName.ToString(),user.Email.Value));
         }
     }
 }

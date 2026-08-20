@@ -9,6 +9,7 @@ namespace ERMS.Api.Endpoints
         {
             new CreateUserEndpoint().MapEndpoint(app);
             new GetUserEndpoint().MapEndpoint(app);
+            new GetUsersEndpoint().MapEndpoint(app);
             return app;
         }
     }

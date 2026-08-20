@@ -15,9 +15,9 @@ namespace ERMS.Infrastructure.Repositories
             _dbContext = dbcontext;
         }
 
-        public Task<IReadOnlyList<User>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async Task<IReadOnlyList<User>> GetAllAsync(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            return await _dbContext.Users.ToListAsync(cancellationToken);
         }
 
         public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
