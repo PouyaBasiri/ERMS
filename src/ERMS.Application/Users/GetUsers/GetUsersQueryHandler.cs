@@ -17,18 +17,27 @@ namespace ERMS.Application.Users.GetUsers
             _userReadRepository = userReadRepository;
         }
 
-        public async Task<Result<GetUsersResponse>> Handle(GetUsersQuery request,CancellationToken cancellationToken)
+        public async Task<Result<GetUsersResponse>> Handle(GetUsersQuery request, CancellationToken cancellationToken)
         {
-            var users = await _userReadRepository.GetAllAsync(cancellationToken);
+            var page = request.Page < 1 ? 1 : request.Page;
+            var pageSize = request.Page is < 1 or > 100 ? 10 : request.PageSize;
 
-            var items = users
+            var result = await _userReadRepository.GetPagedAsync(page, pageSize, cancellationToken);
+
+
+            var items = result.Users
                 .Select(user => new UserItem(
                     user.Id,
                     user.FullName.ToString(),
                     user.Email.Value))
                 .ToList();
 
-            return Result<GetUsersResponse>.Success(new GetUsersResponse(items));
+            var totalPages = result.TotalCount == 0
+                  ? 0
+                  : (int)Math.Ceiling((double)result.TotalCount / pageSize);
+
+
+            return Result<GetUsersResponse>.Success(new GetUsersResponse(items, page, pageSize, result.TotalCount, totalPages));
         }
     }
 }

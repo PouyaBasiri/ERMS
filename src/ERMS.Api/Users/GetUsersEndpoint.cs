@@ -12,9 +12,9 @@ namespace ERMS.Api.Users
             app.MapGet("/api/users",HandleAsync).WithName("GetUsers").WithTags("Users");
         }
 
-        private static async Task<IResult> HandleAsync(ISender sender,CancellationToken cancellationToken)
+        private static async Task<IResult> HandleAsync(int page,int pageSize,ISender sender,CancellationToken cancellationToken)
         {
-            var result = await sender.Send(new GetUsersQuery(),cancellationToken);
+            var result = await sender.Send(new GetUsersQuery(page,pageSize),cancellationToken);
 
             return result.ToHttpResult();
         }

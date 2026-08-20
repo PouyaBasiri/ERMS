@@ -15,14 +15,19 @@ namespace ERMS.Infrastructure.Repositories
             _dbContext = dbcontext;
         }
 
-        public async Task<IReadOnlyList<User>> GetAllAsync(CancellationToken cancellationToken = default)
-        {
-            return await _dbContext.Users.ToListAsync(cancellationToken);
-        }
-
         public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
         {
             return await _dbContext.Users.FirstOrDefaultAsync(x => x.Id == id ,cancellationToken);
+        }
+
+        public async Task<(IReadOnlyList<User> Users, int TotalCount)> GetPagedAsync(int page, int pageSize, CancellationToken cancellationToken = default)
+        {
+            var query = _dbContext.Users.AsNoTracking().OrderBy(user => user.Id);
+            var totalCount = await query.CountAsync(cancellationToken);
+
+            var users = await query.Skip((page - 1) * pageSize).Take(pageSize).ToListAsync(cancellationToken);
+
+            return (users, totalCount);
         }
     }
 }

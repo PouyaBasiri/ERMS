@@ -8,26 +8,27 @@ using System.Text;
 
 namespace ERMS.Infrastructure.Repositories
 {
-    public sealed class UserRepository : IUserRepository, IUserReadRepository 
-    { 
+    public sealed class UserRepository : IUserRepository, IUserReadRepository
+    {
         private readonly ApplicationDbContext _context;
         public UserRepository(ApplicationDbContext context)
-        { 
+        {
             _context = context;
-        } 
-        public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default) 
-        { 
+        }
+        public async Task<User?> GetByIdAsync(Guid id, CancellationToken cancellationToken = default)
+        {
             return await _context.Users.FirstOrDefaultAsync(x => x.Id == id, cancellationToken);
-        } 
-        public async Task<User?> GetByEmailAsync(Email email, CancellationToken cancellationToken = default) 
-        { return await _context.Users.FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
-        } 
-        public async Task<bool> ExistsAsync(Email email, CancellationToken cancellationToken = default) 
-        { 
+        }
+        public async Task<User?> GetByEmailAsync(Email email, CancellationToken cancellationToken = default)
+        {
+            return await _context.Users.FirstOrDefaultAsync(x => x.Email == email, cancellationToken);
+        }
+        public async Task<bool> ExistsAsync(Email email, CancellationToken cancellationToken = default)
+        {
             return await _context.Users.AnyAsync(x => x.Email == email, cancellationToken);
-        } 
-        public async Task AddAsync(User user, CancellationToken cancellationToken = default) 
-        { 
+        }
+        public async Task AddAsync(User user, CancellationToken cancellationToken = default)
+        {
             await _context.Users.AddAsync(user, cancellationToken);
         }
 
@@ -38,9 +39,9 @@ namespace ERMS.Infrastructure.Repositories
 
         public async Task<bool> ExistsByEmailAsync(string email, CancellationToken cancellationToken = default)
         {
-            return await _context.Users.AnyAsync(x => x.Email == email,cancellationToken);
+            return await _context.Users.AnyAsync(x => x.Email == email, cancellationToken);
         }
-        
+
         public void Update(User user)
         {
             throw new NotImplementedException();
@@ -51,9 +52,18 @@ namespace ERMS.Infrastructure.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IReadOnlyList<User>> GetAllAsync(CancellationToken cancellationToken = default)
+        public async Task<(IReadOnlyList<User> Users, int TotalCount)> GetPagedAsync(int page, int pageSize, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var query = _context.Users.AsNoTracking().OrderBy(user => user.Id);
+
+            var totalCount = await query.CountAsync(cancellationToken);
+
+            var users = await query
+                .Skip((page - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync(cancellationToken);
+
+            return (users, totalCount);
         }
     }
 }
