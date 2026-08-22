@@ -8,6 +8,7 @@ namespace ERMS.Domain.Users
     {
         Task<User?> GetByIdAsync(Guid id,CancellationToken cancellationToken = default);
 
-        Task<(IReadOnlyList<User> Users, int TotalCount)> GetPagedAsync(int page,int pageSize,CancellationToken cancellationToken = default);
+        Task<IReadOnlyList<User>> GetAllAsync(
+            CancellationToken cancellationToken = default);
     }
 }

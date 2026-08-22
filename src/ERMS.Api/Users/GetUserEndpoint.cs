@@ -20,8 +20,7 @@ namespace ERMS.Application.Users
         private static async Task<IResult> HandleAsync(Guid id,ISender sender,CancellationToken cancellationToken)
         {
             var result = await sender.Send(
-                new GetUserQuery(id),
-                cancellationToken);
+                new GetUserQuery(id),cancellationToken);
 
             return result.ToHttpResult();
         }
